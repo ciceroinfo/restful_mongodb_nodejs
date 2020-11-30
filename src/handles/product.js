@@ -48,9 +48,16 @@ const remove = async (request, h) => {
     return h.response().code(204);
 };
 
+const update = async (request, h) => {
+    console.log(request.params);
+    const product = await ProductModel.findOne({ _id: request.params.id}, request.payload)
+    return h.response({ data: transformer(product) }).code(201);
+};
+
 module.exports = {
     getAll,
     save,
     remove,
-    find
+    find,
+    update
 };
